@@ -4,7 +4,7 @@
 <dict>
 	<key>passes</key>
 	<dict>
-		<key>pass_mix</key>
+		<key>pass_vert</key>
 		<dict>
 			<key>draw</key>
 			<string>DRAW_QUAD</string>
@@ -13,7 +13,7 @@
 			<key>metalVertexShader</key>
 			<string>pass_through_vertex</string>
 			<key>metalFragmentShader</key>
-			<string>pass_through_fragment</string>
+			<string>pass_through_fragment_vert</string>
 			<key>inputs</key>
 			<dict>
 				<key>colorSampler</key>
@@ -27,10 +27,37 @@
 				<string>COLOR</string>
 			</dict>
 		</dict>
+        <key>pass_hori</key>
+        <dict>
+            <key>draw</key>
+            <string>DRAW_QUAD</string>
+            <key>program</key>
+            <string>doesntexist</string>
+            <key>metalVertexShader</key>
+            <string>pass_through_vertex</string>
+            <key>metalFragmentShader</key>
+            <string>pass_through_fragment_hori</string>
+            <key>inputs</key>
+            <dict>
+                <key>colorSampler</key>
+                <string>COLOR</string>
+                <key>aPos</key>
+                <string>vertexSymbol</string>
+            </dict>
+            <key>outputs</key>
+            <dict>
+                <key>color</key>
+                <string>COLOR</string>
+            </dict>
+        </dict>
 	</dict>
 	<key>sequence</key>
 	<array>
-		<string>pass_mix</string>
+		<string>pass_vert</string>
+		<string>pass_hori</string>
+		<string>pass_vert</string>
+		<string>pass_hori</string>
+		<string>pass_vert</string>
 	</array>
 	<key>symbols</key>
 	<dict>

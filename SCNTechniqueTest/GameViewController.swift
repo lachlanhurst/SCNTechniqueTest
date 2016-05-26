@@ -24,11 +24,12 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
 
         let box = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
         box.firstMaterial?.diffuse.contents = UIColor.blueColor()
         let boxNode = SCNNode(geometry: box)
+        boxNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(0, y: 2, z: 1, duration: 1)))
         scene.rootNode.addChildNode(boxNode)
 
         /*let ambientLight = SCNLight()
