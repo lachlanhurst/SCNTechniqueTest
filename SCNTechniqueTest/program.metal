@@ -29,6 +29,22 @@ vertex out_vertex_t pass_through_vertex(custom_vertex_t in [[stage_in]])
 fragment half4 pass_through_fragment(out_vertex_t vert [[stage_in]],
                                      texture2d<float, access::sample> colorSampler [[texture(0)]])
 {
-    float4 col = colorSampler.sample( s , vert.uv );
-    return half4(col);
+    float vStep = 0.02;
+    float2 p2 = float2(vert.uv.x + 2.0 * vStep, vert.uv.y);
+    float2 p1 = float2(vert.uv.x + 1.0 * vStep, vert.uv.y);
+    float2 p0 = vert.uv;
+    float2 n1 = float2(vert.uv.x - 1.0 * vStep, vert.uv.y);
+    float2 n2 = float2(vert.uv.x - 2.0 * vStep, vert.uv.y);
+
+    float4 v_p2 = colorSampler.sample( s , p2 ) * 0.1;
+    float4 v_p1 = colorSampler.sample( s , p1 ) * 0.2;
+    float4 v_p0 = colorSampler.sample( s , p0 ) * 0.4;
+    float4 v_n1 = colorSampler.sample( s , n1 ) * 0.2;
+    float4 v_n2 = colorSampler.sample( s , n2 ) * 0.1;
+
+    float4 sum = v_p2 + v_p1 + v_p0 + v_n1 + v_n2;
+
+    //float4 col = colorSampler.sample( s , vert.uv );
+
+    return half4(sum);
 };
