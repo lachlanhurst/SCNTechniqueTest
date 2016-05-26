@@ -13,6 +13,8 @@
 		735499161CF66B0B000944CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735499141CF66B0B000944CA /* Main.storyboard */; };
 		735499181CF66B0B000944CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 735499171CF66B0B000944CA /* Assets.xcassets */; };
 		7354991B1CF66B0B000944CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735499191CF66B0B000944CA /* LaunchScreen.storyboard */; };
+		735499231CF66DAC000944CA /* technique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 735499221CF66DAC000944CA /* technique.plist */; };
+		735499251CF66F2F000944CA /* program.metal in Sources */ = {isa = PBXBuildFile; fileRef = 735499241CF66F2F000944CA /* program.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		735499171CF66B0B000944CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7354991A1CF66B0B000944CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7354991C1CF66B0B000944CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		735499221CF66DAC000944CA /* technique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = technique.plist; sourceTree = "<group>"; };
+		735499241CF66F2F000944CA /* program.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = program.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				735499171CF66B0B000944CA /* Assets.xcassets */,
 				735499191CF66B0B000944CA /* LaunchScreen.storyboard */,
 				7354991C1CF66B0B000944CA /* Info.plist */,
+				735499221CF66DAC000944CA /* technique.plist */,
+				735499241CF66F2F000944CA /* program.metal */,
 			);
 			path = SCNTechniqueTest;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 				735499111CF66B0B000944CA /* art.scnassets in Resources */,
 				7354991B1CF66B0B000944CA /* LaunchScreen.storyboard in Resources */,
 				735499181CF66B0B000944CA /* Assets.xcassets in Resources */,
+				735499231CF66DAC000944CA /* technique.plist in Resources */,
 				735499161CF66B0B000944CA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				735499251CF66F2F000944CA /* program.metal in Sources */,
 				735499131CF66B0B000944CA /* GameViewController.swift in Sources */,
 				7354990F1CF66B0B000944CA /* AppDelegate.swift in Sources */,
 			);
