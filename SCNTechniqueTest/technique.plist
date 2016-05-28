@@ -21,7 +21,7 @@
                 <key>clear</key>
                 <true/>
                 <key>clearColor</key>
-                <string>0.0 0.0 0.0 1.0</string>
+                <string>sceneBackground</string>
             </dict>
 		</dict>
 
@@ -42,13 +42,7 @@
                 <key>color</key>
                 <string>color_scene_exc</string>
             </dict>
-            <key>colorStates</key>
-            <dict>
-                <key>clear</key>
-                <true/>
-                <key>clearColor</key>
-                <string>0.0 0.0 0.0 1.0</string>
-            </dict>
+
         </dict>
 		<key>pass_through</key>
 		<dict>
@@ -64,8 +58,6 @@
 			<dict>
 				<key>colorSampler</key>
 				<string>COLOR</string>
-				<key>aPos</key>
-				<string>vertexSymbol</string>
 			</dict>
 			<key>outputs</key>
 			<dict>
@@ -82,13 +74,11 @@
 			<key>metalVertexShader</key>
 			<string>pass_through_vertex</string>
 			<key>metalFragmentShader</key>
-			<string>blur_vertical</string>
+			<string>blur9_vertical</string>
 			<key>inputs</key>
 			<dict>
 				<key>colorSampler</key>
 				<string>color_scene_exc</string>
-				<key>aPos</key>
-				<string>vertexSymbol</string>
 			</dict>
 			<key>outputs</key>
 			<dict>
@@ -105,13 +95,11 @@
 			<key>metalVertexShader</key>
 			<string>pass_through_vertex</string>
 			<key>metalFragmentShader</key>
-			<string>blur_horizontal</string>
+			<string>blur9_horizontal</string>
 			<key>inputs</key>
 			<dict>
 				<key>colorSampler</key>
 				<string>color_scene_exc</string>
-				<key>aPos</key>
-				<string>vertexSymbol</string>
 			</dict>
 			<key>outputs</key>
 			<dict>
@@ -136,8 +124,6 @@
                 <string>color_scene_exc</string>
                 <key>color2Sampler</key>
                 <string>color_scene</string>
-                <key>aPos</key>
-                <string>vertexSymbol</string>
             </dict>
             <key>outputs</key>
             <dict>
@@ -152,8 +138,8 @@
 	<array>
         <string>pass_scene</string>
 		<string>pass_scene_exc</string>
-		<string>blur_vertical</string>
 		<string>blur_horizontal</string>
+        <string>blur_vertical</string>
         <string>mix</string>
 	</array>
     <key>targets</key>
@@ -167,10 +153,23 @@
         <dict>
             <key>type</key>
             <string>color</string>
+            <key>size</key>
+            <string>250x250</string>
         </dict>
     </dict>
 	<key>symbols</key>
 	<dict>
+        <key>resolutionSymbol</key>
+        <dict>
+            <key>type</key>
+            <string>float</string>
+        </dict>
+        <key>radiusSymbol</key>
+        <dict>
+            <key>type</key>
+            <string>float</string>
+        </dict>
+
 		<key>vertexSymbol</key>
 		<dict>
 			<key>semantic</key>

@@ -196,17 +196,6 @@ class GeometryBuildTools {
     }
 
 
-
-    /*static func vectorToColour(vector:SCNVector3) -> vector_float4 {
-        //print(vector)
-
-        let x = (1.5 + vector.x) / 3
-        let y = (1.5 + vector.y) / 3
-        let z = (1.5 + vector.z) / 3
-
-        return vector_float4(x,y,z,0)
-    }*/
-
     static func buildTube(points:[SCNVector3], center:SCNVector3, radius:Float, segmentCount:Int, colour:vector_float4?) -> SCNGeometry {
         var colour = colour
         if colour == nil {
@@ -266,17 +255,17 @@ class GeometryBuildTools {
                         indexList.append(CInt(pointsList.count))
                         pointsList.append(prevPoint)
                         colourList.append(colour!)
-                        normalsList.append(prevNorma)
+                        normalsList.append(prevNorma * 2)
 
                         indexList.append(CInt(pointsList.count))
                         pointsList.append(prevLastPoint)
                         colourList.append(colour!)
-                        normalsList.append(prevLastNorma)
+                        normalsList.append(prevLastNorma * 2)
 
                         indexList.append(CInt(pointsList.count))
                         pointsList.append(lastPoint)
                         colourList.append(colour!)
-                        normalsList.append(lastNorma)
+                        normalsList.append(lastNorma * 2)
 
 
                         indexList.append(CInt(pointsList.count))
