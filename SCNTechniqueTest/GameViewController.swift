@@ -10,11 +10,20 @@ import UIKit
 import QuartzCore
 import SceneKit
 
+struct node_uniforms {
+    var emission_color:vector_float4
+}
+
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        let program = SCNProgram()
+        program.vertexFunctionName = "bloom_vertex"
+        program.fragmentFunctionName = "bloom_fragment"
+
+
         // create a new scene
         let scene = SCNScene()
         
@@ -26,11 +35,27 @@ class GameViewController: UIViewController {
         // place the camera
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
 
-        let box = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor.blueColor()
+        let box = GeometryBuildTools.buildBox() //SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = UIColor.whiteColor()
+
+        //var uniforms = node_uniforms(emission_color: vector_float4(1.0,0.0,0.0,1.0))
+        //let uniformsData = NSData(bytes: &uniforms, length: sizeof(node_uniforms))
+        //box.firstMaterial?.setValue(uniformsData, forKey: "uniforms")
+        //box.firstMaterial?.program = program
+
+
         let boxNode = SCNNode(geometry: box)
-        boxNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(0, y: 2, z: 1, duration: 1)))
+        //boxNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(0, y: 2, z: 1, duration: 1)))
         scene.rootNode.addChildNode(boxNode)
+
+        let sphere = GeometryBuildTools.buildSpiral() //SCNSphere(radius: 0.5)
+        sphere.firstMaterial?.diffuse.contents = UIColor.redColor()
+        //sphere.firstMaterial?.setValue(uniformsData, forKey: "uniforms")
+        //sphere.firstMaterial?.program = program
+
+        let sphereNode = SCNNode(geometry: sphere)
+        scene.rootNode.addChildNode(sphereNode)
+
 
         /*let ambientLight = SCNLight()
         ambientLight.color = UIColor.whiteColor()
@@ -52,8 +77,8 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
 
-
-        if let path = NSBundle.mainBundle().pathForResource("technique", ofType: "plist") {
+        let techniqueName = "technique" //"bloomRegions"
+        if let path = NSBundle.mainBundle().pathForResource(techniqueName, ofType: "plist") {
             if let dico1 = NSDictionary(contentsOfFile: path)  {
                 let dico = dico1 as! [String : AnyObject]
 
