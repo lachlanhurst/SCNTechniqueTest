@@ -16,6 +16,8 @@ struct node_uniforms {
 
 class GameViewController: UIViewController {
 
+    var technique:SCNTechnique!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,10 +52,12 @@ class GameViewController: UIViewController {
 
         let sphere = GeometryBuildTools.buildSpiral() //SCNSphere(radius: 0.5)
         sphere.firstMaterial?.diffuse.contents = UIColor.redColor()
+        sphere.firstMaterial?.selfIllumination.contents = UIColor.redColor()
         //sphere.firstMaterial?.setValue(uniformsData, forKey: "uniforms")
         //sphere.firstMaterial?.program = program
 
         let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.opacity = 0.4
         scene.rootNode.addChildNode(sphereNode)
 
 
@@ -68,6 +72,7 @@ class GameViewController: UIViewController {
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         scnView.scene = scene
+        scnView.playing = true
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         scnView.showsStatistics = true
@@ -77,21 +82,41 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
 
-        let techniqueName = "technique" //"bloomRegions"
+        let techniqueName = "technique"
+        //let techniqueName = "bloomRegions"
         if let path = NSBundle.mainBundle().pathForResource(techniqueName, ofType: "plist") {
             if let dico1 = NSDictionary(contentsOfFile: path)  {
                 let dico = dico1 as! [String : AnyObject]
 
                 let technique = SCNTechnique(dictionary:dico)
+
+                //let val = NSValue(CGSize: CGSizeMake(1, 1))
+                //technique?.setObject(val, forKeyedSubscript: "radiusSymbol")
+
+                //technique?.setValue(val, forKeyPath: "radiusSymbol")
+                //technique?.setObject(NSNumber(float: 0.5), forKeyedSubscript: "radiusSymbol")
+                /*technique?.handleBindingOfSymbol("radiusSymbol", usingBlock:
+                    { programID, location, renderedNode, renderer in
+                        print("loc \(location)")
+                    }
+                )*/
+
                 scnView.technique = technique
+                self.technique = technique
+
+
             }
         }
     }
     
     func handleTap(gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
-        //let scnView = self.view as! SCNView
-        
+        let scnView = self.view as! SCNView
+        if scnView.technique == nil {
+            scnView.technique = technique
+        } else {
+            scnView.technique = nil
+        }
 
     }
     

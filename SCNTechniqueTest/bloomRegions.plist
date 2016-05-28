@@ -16,7 +16,10 @@
                 <key>metalFragmentShader</key>
                 <string>bloom_fragment</string>
                 <key>inputs</key>
-                <dict/>
+                <dict>
+                    <key>radius</key>
+                    <string>radiusSymbol</string>
+                </dict>
                 <key>outputs</key>
                 <dict>
                     <key>color</key>
@@ -46,6 +49,11 @@
         </dict>
         <key>symbols</key>
         <dict>
+            <key>radiusSymbol</key>
+            <dict>
+                <key>type</key>
+                <string>float2</string>
+            </dict>
             <key>vertexSymbol</key>
             <dict>
                 <key>semantic</key>
