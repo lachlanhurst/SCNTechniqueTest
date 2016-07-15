@@ -108,6 +108,32 @@ class GeometryBuildTools {
         return geom
     }
 
+    static func buildGeometryWithColor(geometry:SCNGeometry, color:vector_float4) -> SCNGeometry {
+
+        let indexElement = geometry.geometryElementAtIndex(0)
+
+        let vertexSource = geometry.geometrySourcesForSemantic(SCNGeometrySourceSemanticVertex).first!
+        let normalSource = geometry.geometrySourcesForSemantic(SCNGeometrySourceSemanticNormal).first!
+
+        let vertexCount = vertexSource.vectorCount
+
+
+        let colourList = [vector_float4](count:vertexCount, repeatedValue:color)
+
+        let colourData = NSData(bytes: colourList, length: colourList.count * sizeof(vector_float4))
+        let colourSource = SCNGeometrySource(data: colourData,
+                                             semantic: SCNGeometrySourceSemanticColor,
+                                             vectorCount: colourList.count,
+                                             floatComponents: true,
+                                             componentsPerVector: 4,
+                                             bytesPerComponent: sizeof(Float),
+                                             dataOffset: 0,
+                                             dataStride: sizeof(vector_float4))
+        let geo = SCNGeometry(sources: [vertexSource,normalSource,colourSource], elements: [indexElement])
+        return geo
+    }
+
+
     static func buildSpiral() -> SCNGeometry {
 
         var centerPoints:[SCNVector3] = []
