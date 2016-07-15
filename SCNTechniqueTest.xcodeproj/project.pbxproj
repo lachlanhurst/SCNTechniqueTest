@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		730C1EA11CF92E5100CFE4CD /* bloomRegions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 730C1EA01CF92E5100CFE4CD /* bloomRegions.plist */; };
 		734C924B1CF93D7F0043D21D /* GeometryBuildTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C924A1CF93D7F0043D21D /* GeometryBuildTools.swift */; };
 		734C924D1CF93DBE0043D21D /* SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C924C1CF93DBE0043D21D /* SCNVector3Extensions.swift */; };
 		7354990F1CF66B0B000944CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7354990E1CF66B0B000944CA /* AppDelegate.swift */; };
@@ -18,10 +17,11 @@
 		7354991B1CF66B0B000944CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735499191CF66B0B000944CA /* LaunchScreen.storyboard */; };
 		735499231CF66DAC000944CA /* technique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 735499221CF66DAC000944CA /* technique.plist */; };
 		735499251CF66F2F000944CA /* program.metal in Sources */ = {isa = PBXBuildFile; fileRef = 735499241CF66F2F000944CA /* program.metal */; };
+		73FE081F1D38916E006C727E /* pixelate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73FE081E1D38916E006C727E /* pixelate.plist */; };
+		73FE08211D389189006C727E /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 73FE08201D389189006C727E /* pixelate.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		730C1EA01CF92E5100CFE4CD /* bloomRegions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bloomRegions.plist; sourceTree = "<group>"; };
 		734C924A1CF93D7F0043D21D /* GeometryBuildTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryBuildTools.swift; sourceTree = "<group>"; };
 		734C924C1CF93DBE0043D21D /* SCNVector3Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNVector3Extensions.swift; sourceTree = "<group>"; };
 		7354990B1CF66B0B000944CA /* SCNTechniqueTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCNTechniqueTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +34,8 @@
 		7354991C1CF66B0B000944CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		735499221CF66DAC000944CA /* technique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = technique.plist; sourceTree = "<group>"; };
 		735499241CF66F2F000944CA /* program.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = program.metal; sourceTree = "<group>"; };
+		73FE081E1D38916E006C727E /* pixelate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pixelate.plist; sourceTree = "<group>"; };
+		73FE08201D389189006C727E /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pixelate.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +77,8 @@
 				7354991C1CF66B0B000944CA /* Info.plist */,
 				735499221CF66DAC000944CA /* technique.plist */,
 				735499241CF66F2F000944CA /* program.metal */,
-				730C1EA01CF92E5100CFE4CD /* bloomRegions.plist */,
+				73FE081E1D38916E006C727E /* pixelate.plist */,
+				73FE08201D389189006C727E /* pixelate.metal */,
 				734C924A1CF93D7F0043D21D /* GeometryBuildTools.swift */,
 				734C924C1CF93DBE0043D21D /* SCNVector3Extensions.swift */,
 			);
@@ -140,10 +143,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				730C1EA11CF92E5100CFE4CD /* bloomRegions.plist in Resources */,
 				735499111CF66B0B000944CA /* art.scnassets in Resources */,
 				7354991B1CF66B0B000944CA /* LaunchScreen.storyboard in Resources */,
 				735499181CF66B0B000944CA /* Assets.xcassets in Resources */,
+				73FE081F1D38916E006C727E /* pixelate.plist in Resources */,
 				735499231CF66DAC000944CA /* technique.plist in Resources */,
 				735499161CF66B0B000944CA /* Main.storyboard in Resources */,
 			);
@@ -161,6 +164,7 @@
 				735499131CF66B0B000944CA /* GameViewController.swift in Sources */,
 				7354990F1CF66B0B000944CA /* AppDelegate.swift in Sources */,
 				734C924D1CF93DBE0043D21D /* SCNVector3Extensions.swift in Sources */,
+				73FE08211D389189006C727E /* pixelate.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -82,13 +82,13 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
 
-        let techniqueName = "technique"
-        //let techniqueName = "bloomRegions"
+        //let techniqueName = "technique"
+        let techniqueName = "pixelate"
         if let path = NSBundle.mainBundle().pathForResource(techniqueName, ofType: "plist") {
-            if let dico1 = NSDictionary(contentsOfFile: path)  {
-                let dico = dico1 as! [String : AnyObject]
+            if let plistDict = NSDictionary(contentsOfFile: path)  {
+                let plistStrDict = plistDict as! [String : AnyObject]
 
-                let technique = SCNTechnique(dictionary:dico)
+                let technique = SCNTechnique(dictionary:plistStrDict)
 
                 //let val = NSValue(CGSize: CGSizeMake(1, 1))
                 //technique?.setObject(val, forKeyedSubscript: "radiusSymbol")

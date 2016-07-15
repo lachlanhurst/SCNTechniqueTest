@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>passes</key>
+        <dict>
+
+            <key>pixelate_scene</key>
+            <dict>
+                <key>draw</key>
+                <string>DRAW_SCENE</string>
+                <key>inputs</key>
+                <dict/>
+                <key>outputs</key>
+                <dict>
+                    <key>color</key>
+                    <string>color_scene</string>
+                </dict>
+                <key>colorStates</key>
+                <dict>
+                    <key>clear</key>
+                    <true/>
+                    <key>clearColor</key>
+                    <string>sceneBackground</string>
+                </dict>
+            </dict>
+
+            <key>resample_pixelation</key>
+            <dict>
+                <key>draw</key>
+                <string>DRAW_QUAD</string>
+                <key>program</key>
+                <string>doesntexist</string>
+                <key>metalVertexShader</key>
+                <string>pixelate_pass_through_vertex</string>
+                <key>metalFragmentShader</key>
+                <string>pixelate_pass_through_fragment</string>
+                <key>inputs</key>
+                <dict>
+                    <key>colorSampler</key>
+                    <string>color_scene</string>
+                </dict>
+                <key>outputs</key>
+                <dict>
+                    <key>color</key>
+                    <string>COLOR</string>
+                </dict>
+            </dict>
+
+            
+        </dict>
+        <key>sequence</key>
+        <array>
+            <string>pixelate_scene</string>
+            <string>resample_pixelation</string>
+        </array>
+        <key>targets</key>
+        <dict>
+            <key>color_scene</key>
+            <dict>
+                <key>type</key>
+                <string>color</string>
+                <key>size</key>
+                <string>75x75</string>
+            </dict>
+        </dict>
+        <key>symbols</key>
+        <dict></dict>
+    </dict>
+</plist>
