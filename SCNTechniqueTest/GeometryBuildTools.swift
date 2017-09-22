@@ -102,33 +102,33 @@ class GeometryBuildTools {
             5, 7, 6
         ]
 
-        let colors = [vector_float4](count:positions.count, repeatedValue:vector_float4(1.0,1.0,1.0,0.0))
+        let colors = [vector_float4](repeating: vector_float4(1.0,1.0,1.0,0.0), count: positions.count)
 
         let geom = packGeometryTriangles(positions, indexList: indices, colourList: colors, normalsList: normals)
         return geom
     }
 
-    static func buildGeometryWithColor(geometry:SCNGeometry, color:vector_float4) -> SCNGeometry {
+    static func buildGeometryWithColor(_ geometry:SCNGeometry, color:vector_float4) -> SCNGeometry {
 
-        let indexElement = geometry.geometryElementAtIndex(0)
+        let indexElement = geometry.geometryElement(at: 0)
 
-        let vertexSource = geometry.geometrySourcesForSemantic(SCNGeometrySourceSemanticVertex).first!
-        let normalSource = geometry.geometrySourcesForSemantic(SCNGeometrySourceSemanticNormal).first!
+        let vertexSource = geometry.getGeometrySources(for: SCNGeometrySource.Semantic.vertex).first!
+        let normalSource = geometry.getGeometrySources(for: SCNGeometrySource.Semantic.normal).first!
 
         let vertexCount = vertexSource.vectorCount
 
 
-        let colourList = [vector_float4](count:vertexCount, repeatedValue:color)
+        let colourList = [vector_float4](repeating: color, count: vertexCount)
 
-        let colourData = NSData(bytes: colourList, length: colourList.count * sizeof(vector_float4))
+        let colourData = Data(bytes: colourList, count: colourList.count * MemoryLayout<vector_float4>.size)
         let colourSource = SCNGeometrySource(data: colourData,
-                                             semantic: SCNGeometrySourceSemanticColor,
+                                             semantic: SCNGeometrySource.Semantic.color,
                                              vectorCount: colourList.count,
-                                             floatComponents: true,
+                                             usesFloatComponents: true,
                                              componentsPerVector: 4,
-                                             bytesPerComponent: sizeof(Float),
+                                             bytesPerComponent: MemoryLayout<Float>.size,
                                              dataOffset: 0,
-                                             dataStride: sizeof(vector_float4))
+                                             dataStride: MemoryLayout<vector_float4>.size)
         let geo = SCNGeometry(sources: [vertexSource,normalSource,colourSource], elements: [indexElement])
         return geo
     }
@@ -138,7 +138,7 @@ class GeometryBuildTools {
 
         var centerPoints:[SCNVector3] = []
 
-        let angleStep = Float(M_PI) / 30
+        let angleStep:Float = .pi / 30
         let zStep:Float = 0.01
         let radius:Float = 1
 
@@ -165,70 +165,69 @@ class GeometryBuildTools {
     /**
      Takes the various arrays and makes a geometry object from it
      */
-    static func packGeometryTriangles(pointsList: [SCNVector3],
+    static func packGeometryTriangles(_ pointsList: [SCNVector3],
                                       indexList: [CInt],
                                       colourList:[vector_float4]?,
                                       normalsList: [SCNVector3]) -> SCNGeometry {
 
-        let vertexData = NSData(bytes: pointsList, length: pointsList.count * sizeof(SCNVector3))
+        let vertexData = Data(bytes: pointsList, count: pointsList.count * MemoryLayout<vector_float3>.size)
         let vertexSourceNew = SCNGeometrySource(data: vertexData,
-                                                semantic: SCNGeometrySourceSemanticVertex,
+                                                semantic: SCNGeometrySource.Semantic.vertex,
                                                 vectorCount: pointsList.count,
-                                                floatComponents: true,
+                                                usesFloatComponents: true,
                                                 componentsPerVector: 3,
-                                                bytesPerComponent: sizeof(Float),
+                                                bytesPerComponent: MemoryLayout<Float>.size,
                                                 dataOffset: 0,
-                                                dataStride: sizeof(SCNVector3))
+                                                dataStride: MemoryLayout<SCNVector3>.size)
 
-        let normalData = NSData(bytes: normalsList, length: normalsList.count * sizeof(SCNVector3))
+        let normalData = Data(bytes: normalsList, count: normalsList.count * MemoryLayout<vector_float3>.size)
         let normalSource = SCNGeometrySource(data: normalData,
-                                             semantic: SCNGeometrySourceSemanticNormal,
+                                             semantic: SCNGeometrySource.Semantic.normal,
                                              vectorCount: normalsList.count,
-                                             floatComponents: true,
+                                             usesFloatComponents: true,
                                              componentsPerVector: 3,
-                                             bytesPerComponent: sizeof(Float),
+                                             bytesPerComponent: MemoryLayout<Float>.size,
                                              dataOffset: 0,
-                                             dataStride: sizeof(SCNVector3))
+                                             dataStride: MemoryLayout<SCNVector3>.size)
 
 
-
-        let indexData  = NSData(bytes: indexList, length: sizeof(CInt) * indexList.count)
+        let indexData = Data(bytes: indexList, count: indexList.count * MemoryLayout<CInt>.size)
         let indexElement = SCNGeometryElement(
             data: indexData,
-            primitiveType: SCNGeometryPrimitiveType.Triangles,
+            primitiveType: SCNGeometryPrimitiveType.triangles,
             primitiveCount: indexList.count/3,
-            bytesPerIndex: sizeof(CInt)
+            bytesPerIndex: MemoryLayout<CInt>.size
         )
 
         if let colourList = colourList {
-            let colourData = NSData(bytes: colourList, length: colourList.count * sizeof(vector_float4))
+            let colourData = Data(bytes: colourList, count: colourList.count * MemoryLayout<vector_float4>.size)
             let colourSource = SCNGeometrySource(data: colourData,
-                                                 semantic: SCNGeometrySourceSemanticColor,
+                                                 semantic: SCNGeometrySource.Semantic.color,
                                                  vectorCount: colourList.count,
-                                                 floatComponents: true,
+                                                 usesFloatComponents: true,
                                                  componentsPerVector: 4,
-                                                 bytesPerComponent: sizeof(Float),
+                                                 bytesPerComponent: MemoryLayout<Float>.size,
                                                  dataOffset: 0,
-                                                 dataStride: sizeof(vector_float4))
+                                                 dataStride: MemoryLayout<vector_float4>.size)
             let geo = SCNGeometry(sources: [vertexSourceNew,normalSource,colourSource], elements: [indexElement])
-            geo.firstMaterial?.litPerPixel = false
+            geo.firstMaterial?.isLitPerPixel = false
             return geo
         } else {
             let geo = SCNGeometry(sources: [vertexSourceNew,normalSource], elements: [indexElement])
-            geo.firstMaterial?.litPerPixel = false
+            geo.firstMaterial?.isLitPerPixel = false
             return geo
         }
 
     }
 
 
-    static func buildTube(points:[SCNVector3], center:SCNVector3, radius:Float, segmentCount:Int, colour:vector_float4?) -> SCNGeometry {
+    static func buildTube(_ points:[SCNVector3], center:SCNVector3, radius:Float, segmentCount:Int, colour:vector_float4?) -> SCNGeometry {
         var colour = colour
         if colour == nil {
             colour = vector_float4(0,0,0,1)
         }
 
-        let segmentRotationAngle = 2 * Float(M_PI) / Float(segmentCount)
+        let segmentRotationAngle:Float = 2 * .pi / Float(segmentCount)
 
         var pointsList: [SCNVector3] = []
         var normalsList: [SCNVector3] = []
@@ -238,7 +237,7 @@ class GeometryBuildTools {
         var lastPt:SCNVector3? = nil
         var lastPtsOffset:[SCNVector3]? = nil
         var lastNormalsOffset:[SCNVector3]? = nil
-        for (i,pt) in points.enumerate() {
+        for (i,pt) in points.enumerated() {
 
             let distanceFromEnd = min(points.count - i, i)
             let radiusMultiplicationFactor = min(Float(distanceFromEnd) / 4, 1)
@@ -252,8 +251,8 @@ class GeometryBuildTools {
                 let startOffsetVector = normal * (radius * radiusMultiplicationFactor)
                 let startOffsetVectorGlk = SCNVector3ToGLKVector3(startOffsetVector)
 
-                var offsetPoints = [SCNVector3](count:segmentCount, repeatedValue:SCNVector3Zero)
-                var offsetNormalVectors = [SCNVector3](count:segmentCount, repeatedValue:SCNVector3Zero)
+                var offsetPoints = [SCNVector3](repeating: SCNVector3Zero, count: segmentCount)
+                var offsetNormalVectors = [SCNVector3](repeating: SCNVector3Zero, count: segmentCount)
 
                 var rotation:Float = 0
                 for i in 0..<segmentCount {
@@ -266,7 +265,7 @@ class GeometryBuildTools {
                     rotation += segmentRotationAngle
                 }
 
-                if let lastPtsOffset = lastPtsOffset, lastNormalsOffset = lastNormalsOffset {
+                if let lastPtsOffset = lastPtsOffset, let lastNormalsOffset = lastNormalsOffset {
 
                     var prevLastPoint = lastPtsOffset[segmentCount-1]
                     var prevLastNorma = lastNormalsOffset[segmentCount-1]
