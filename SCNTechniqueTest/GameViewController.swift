@@ -38,7 +38,7 @@ class GameViewController: UIViewController {
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 5)
 
         let box = GeometryBuildTools.buildBox() //SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor.whiteColor()
+        box.firstMaterial?.diffuse.contents = UIColor.white
 
         //var uniforms = node_uniforms(emission_color: vector_float4(1.0,0.0,0.0,1.0))
         //let uniformsData = NSData(bytes: &uniforms, length: sizeof(node_uniforms))
@@ -51,8 +51,8 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(boxNode)
 
         let sphere = GeometryBuildTools.buildSpiral() //SCNSphere(radius: 0.5)
-        sphere.firstMaterial?.diffuse.contents = UIColor.redColor()
-        sphere.firstMaterial?.selfIllumination.contents = UIColor.redColor()
+        sphere.firstMaterial?.diffuse.contents = UIColor.red
+        sphere.firstMaterial?.selfIllumination.contents = UIColor.red
         //sphere.firstMaterial?.setValue(uniformsData, forKey: "uniforms")
         //sphere.firstMaterial?.program = program
 
@@ -72,11 +72,11 @@ class GameViewController: UIViewController {
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         scnView.scene = scene
-        scnView.playing = true
+        scnView.isPlaying = true
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         scnView.showsStatistics = true
-        scnView.backgroundColor = UIColor.lightGrayColor()
+        scnView.backgroundColor = UIColor.lightGray
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -84,7 +84,7 @@ class GameViewController: UIViewController {
 
         let techniqueName = "technique"
         //let techniqueName = "bloomRegions"
-        if let path = NSBundle.mainBundle().pathForResource(techniqueName, ofType: "plist") {
+        if let path = Bundle.main.path(forResource: techniqueName, ofType: "plist") {
             if let dico1 = NSDictionary(contentsOfFile: path)  {
                 let dico = dico1 as! [String : AnyObject]
 
@@ -109,7 +109,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func handleTap(gestureRecognize: UIGestureRecognizer) {
+    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         if scnView.technique == nil {
@@ -120,19 +120,19 @@ class GameViewController: UIViewController {
 
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
         } else {
-            return .All
+            return .all
         }
     }
     

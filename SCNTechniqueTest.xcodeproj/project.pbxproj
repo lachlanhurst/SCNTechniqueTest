@@ -114,6 +114,8 @@
 				TargetAttributes = {
 					7354990A1CF66B0B000944CA = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4F7DKRYKP6;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -275,10 +277,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4F7DKRYKP6;
 				INFOPLIST_FILE = SCNTechniqueTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lachlanhurst.SCNTechniqueTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -286,10 +290,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4F7DKRYKP6;
 				INFOPLIST_FILE = SCNTechniqueTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lachlanhurst.SCNTechniqueTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
